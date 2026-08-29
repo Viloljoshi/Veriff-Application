@@ -1,6 +1,6 @@
 # IDV Reliability Lab
 
-An independent product case created for the Senior Product Manager — Document Verification opportunity at Veriff.
+An independent product case created for the Senior Product Manager, Document Verification opportunity at Veriff.
 
 The case explores a common ML product challenge: aggregate model health can conceal a customer-specific domain gap.
 
