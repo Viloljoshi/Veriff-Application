@@ -648,13 +648,12 @@ ORDER BY first_pass_rate ASC;</code></pre>
             <div class="message response-message">
               <span>My response</span>
               <p>
-                We can reproduce the deterioration and have concentrated most of it within one document cohort rather than overall system performance.
+                You’re right to flag this. We’ve reproduced the conversion decline and traced most of it to one document cohort. Traffic outside that cohort remains stable.
               </p>
               <p>
-                Performance outside that cohort currently appears stable, so I would not recommend changing the global decision policy.
-                I’d temporarily protect the affected traffic while we validate root cause, then widen any change only after the cohort passes fraud, conversion and latency guardrails.
+                We’re protecting the affected traffic while we test whether the release caused the regression. I would not change the global decision policy unless the evidence shows broader impact.
               </p>
-              <p>I’ll separate what we know, what we’re still testing and the evidence required before rollout.</p>
+              <p>Next update: confirmed facts, open hypotheses, current containment, and the fraud, conversion and latency gates required for rollout.</p>
             </div>
           </div>
 
