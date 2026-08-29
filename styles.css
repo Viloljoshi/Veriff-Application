@@ -42,11 +42,11 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-height) + 24px);
+  scroll-padding-top: calc(var(--header-height) + env(safe-area-inset-top) + 24px);
 }
 
 section[id] {
-  scroll-margin-top: calc(var(--header-height) + 24px);
+  scroll-margin-top: calc(var(--header-height) + env(safe-area-inset-top) + 24px);
 }
 
 body {
@@ -128,9 +128,10 @@ h3 {
 .skip-link {
   position: fixed;
   z-index: var(--z-skip);
-  top: 12px;
+  top: max(12px, env(safe-area-inset-top));
   left: 12px;
   padding: 10px 14px;
+  min-height: 44px;
   border-radius: var(--radius-sm);
   background: var(--white);
   color: var(--ink);
@@ -171,6 +172,7 @@ h3 {
   position: sticky;
   z-index: var(--z-sticky);
   top: 0;
+  padding-top: env(safe-area-inset-top);
   background: rgba(247, 245, 239, 0.96);
   border-bottom: 1px solid transparent;
 }
@@ -197,7 +199,6 @@ h3 {
   background: var(--mint);
   transform: scaleX(0);
   transform-origin: left;
-  will-change: transform;
 }
 
 .nav-shell {
@@ -215,6 +216,7 @@ h3 {
   align-items: center;
   gap: 11px;
   width: fit-content;
+  min-height: 44px;
   text-decoration: none;
   font-size: 15px;
   font-weight: 750;
@@ -251,6 +253,7 @@ h3 {
 .desktop-nav a {
   position: relative;
   padding: 10px 12px;
+  min-height: 44px;
   text-decoration: none;
   color: var(--ink-muted);
   font-size: 14px;
@@ -285,6 +288,7 @@ h3 {
   align-items: center;
   gap: 8px;
   padding: 10px 14px;
+  min-height: 44px;
   border: 1px solid var(--ink);
   border-radius: var(--radius-sm);
   text-decoration: none;
@@ -426,7 +430,7 @@ h3 {
 }
 
 .button-compact {
-  min-height: 42px;
+  min-height: 44px;
   padding-inline: 15px;
   background: var(--ink);
   color: var(--white);
@@ -2342,8 +2346,8 @@ input[type="range"] {
 .dialog-head button {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--line);
   border-radius: 50%;
   background: var(--white);
@@ -2417,7 +2421,7 @@ input[type="range"] {
 
   .mobile-menu {
     position: absolute;
-    top: calc(var(--header-height) - 1px);
+    top: calc(var(--header-height) + env(safe-area-inset-top) - 1px);
     right: 0;
     left: 0;
     display: grid;
@@ -2864,6 +2868,9 @@ input[type="range"] {
   .text-link,
   .button-link,
   .footer-links a,
+  .fact a,
+  .public-case > a,
+  .contact-actions > a:not(.button),
   summary {
     min-height: 44px;
   }
@@ -2871,6 +2878,13 @@ input[type="range"] {
   .text-link,
   .button-link,
   .footer-links a {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .fact a,
+  .public-case > a,
+  .contact-actions > a:not(.button) {
     display: inline-flex;
     align-items: center;
   }

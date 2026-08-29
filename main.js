@@ -52,17 +52,21 @@ updatePageChrome();
 window.addEventListener("scroll", requestPageChromeUpdate, { passive: true });
 
 const healthMap = document.querySelector("[data-health-map]");
+const diagnosticChain = document.querySelector("[data-diagnostic-chain]");
 let healthMapWasCompact = false;
 
 function updateHealthMapViewport() {
-  if (!healthMap) return;
   const isCompact = window.innerWidth <= 850;
-  if (isCompact && !healthMapWasCompact) {
+  if (healthMap && isCompact && !healthMapWasCompact) {
     window.requestAnimationFrame(() => {
       healthMap.scrollLeft = (healthMap.scrollWidth - healthMap.clientWidth) / 2;
     });
-  } else if (!isCompact && healthMapWasCompact) {
+  } else if (healthMap && !isCompact && healthMapWasCompact) {
     healthMap.scrollLeft = 0;
+  }
+  if (healthMap) healthMap.tabIndex = isCompact && healthMap.scrollWidth > healthMap.clientWidth ? 0 : -1;
+  if (diagnosticChain) {
+    diagnosticChain.tabIndex = window.innerWidth <= 600 && diagnosticChain.scrollWidth > diagnosticChain.clientWidth ? 0 : -1;
   }
   healthMapWasCompact = isCompact;
 }
@@ -90,25 +94,29 @@ if (reducedMotion || !("IntersectionObserver" in window)) {
 }
 
 const navLinks = [...document.querySelectorAll("[data-nav-link]")];
-const trackedSections = [...document.querySelectorAll("[data-section]")];
+const trackedSections = [...document.querySelectorAll("[data-nav-section]")];
 
 if ("IntersectionObserver" in window && trackedSections.length) {
   const visibleSections = new Map();
   const navObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) visibleSections.set(entry.target.id, entry.intersectionRatio);
-        else visibleSections.delete(entry.target.id);
+        if (entry.isIntersecting) {
+          visibleSections.set(entry.target, {
+            section: entry.target.dataset.navSection,
+            ratio: entry.intersectionRatio,
+          });
+        } else visibleSections.delete(entry.target);
       });
 
-      const current = [...visibleSections.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+      const current = [...visibleSections.values()].sort((a, b) => b.ratio - a.ratio)[0]?.section;
       navLinks.forEach((link) => {
         const isCurrent = link.getAttribute("href") === `#${current}`;
         if (isCurrent) link.setAttribute("aria-current", "location");
         else link.removeAttribute("aria-current");
       });
     },
-    { threshold: [0.15, 0.35, 0.55], rootMargin: "-15% 0px -55%" },
+    { threshold: 0, rootMargin: "-20% 0px -70%" },
   );
 
   trackedSections.forEach((section) => navObserver.observe(section));
@@ -205,7 +213,7 @@ function percentage(value) {
   return `${value.toFixed(1)}%`;
 }
 
-function updateThreshold() {
+function updateThreshold(announce = false) {
   if (!thresholdSlider || !thresholdOutput) return;
   const value = Number(thresholdSlider.value);
   const position = (value - 25) / 60;
@@ -222,13 +230,13 @@ function updateThreshold() {
   Object.entries(conceptual).forEach(([key, metricValue]) => {
     if (thresholdMetrics[key]) thresholdMetrics[key].textContent = percentage(metricValue);
   });
-  if (thresholdAnnouncement) {
+  if (announce && thresholdAnnouncement) {
     thresholdAnnouncement.textContent = `Threshold ${value}. Fraud recall ${percentage(conceptual.recall)}. Fraud precision ${percentage(conceptual.precision)}. False acceptance ${percentage(conceptual.far)}. False rejection ${percentage(conceptual.frr)}. Genuine conversion ${percentage(conceptual.conversion)}.`;
   }
 }
 
-thresholdSlider?.addEventListener("input", updateThreshold);
-updateThreshold();
+thresholdSlider?.addEventListener("input", () => updateThreshold(true));
+updateThreshold(false);
 
 const roleDialog = document.querySelector("[data-role-dialog]");
 const openRoleDialogButton = document.querySelector("[data-open-role-dialog]");

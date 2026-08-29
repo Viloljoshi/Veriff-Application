@@ -190,7 +190,7 @@
         </div>
       </section>
 
-      <section class="section-pad section-light" id="problem" aria-labelledby="problem-title" data-section="problem">
+      <section class="section-pad section-light" id="problem" aria-labelledby="problem-title" data-nav-section="problem">
         <div class="page-shell">
           <div class="section-heading reveal">
             <p class="section-index">01 · The problem</p>
@@ -199,7 +199,7 @@
           </div>
 
           <p class="scroll-hint reveal">Swipe to compare customer cohorts <span aria-hidden="true">→</span></p>
-          <div class="health-map reveal" role="group" tabindex="0" aria-label="Customer health comparison. Scroll horizontally on small screens. Global model is healthy while Customer C contains one warning cohort." data-health-map>
+          <div class="health-map reveal" role="group" tabindex="-1" aria-label="Customer health comparison. Scroll horizontally on small screens. Global model is healthy while Customer C contains one warning cohort." data-health-map>
             <div class="map-stage">
               <div class="global-node">
                 <span>Global model</span>
@@ -236,7 +236,7 @@
         </div>
       </section>
 
-      <section class="section-pad section-dark" aria-labelledby="better-title">
+      <section class="section-pad section-dark" aria-labelledby="better-title" data-nav-section="problem">
         <div class="page-shell">
           <div class="section-heading section-heading-dark reveal">
             <p class="section-index">02 · Define what better means</p>
@@ -273,7 +273,7 @@
         </div>
       </section>
 
-      <section class="section-pad" id="incident" aria-labelledby="incident-title">
+      <section class="section-pad" id="incident" aria-labelledby="incident-title" data-nav-section="problem">
         <div class="page-shell">
           <div class="section-heading reveal">
             <div class="heading-labels">
@@ -325,7 +325,7 @@
         </div>
       </section>
 
-      <section class="section-pad section-mint" id="diagnose" aria-labelledby="diagnose-title" data-section="diagnose">
+      <section class="section-pad section-mint" id="diagnose" aria-labelledby="diagnose-title" data-nav-section="diagnose">
         <div class="page-shell">
           <div class="section-heading reveal">
             <div class="heading-labels">
@@ -383,7 +383,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         </div>
       </section>
 
-      <section class="section-pad" aria-labelledby="rca-title">
+      <section class="section-pad" aria-labelledby="rca-title" data-nav-section="diagnose">
         <div class="page-shell">
           <div class="section-heading reveal">
             <p class="section-index">05 · Root-cause analysis</p>
@@ -392,7 +392,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
           </div>
 
           <p class="scroll-hint reveal">Swipe through the diagnostic pipeline <span aria-hidden="true">→</span></p>
-          <div class="diagnostic-chain reveal" role="list" tabindex="0" aria-label="Diagnostic chain from traffic to human review. Scroll horizontally on small screens.">
+          <div class="diagnostic-chain reveal" role="list" tabindex="-1" aria-label="Diagnostic chain from traffic to human review. Scroll horizontally on small screens." data-diagnostic-chain>
             <article role="listitem"><span>01</span><h3>Traffic mix</h3><p>New variant?<br />Geographic shift?</p></article>
             <article role="listitem"><span>02</span><h3>Capture</h3><p>Image quality?<br />SDK or device change?</p></article>
             <article role="listitem"><span>03</span><h3>Classification</h3><p>Confidence shift?<br />Specimen mismatch?</p></article>
@@ -425,7 +425,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         </div>
       </section>
 
-      <section class="section-pad threshold-section" aria-labelledby="threshold-title">
+      <section class="section-pad threshold-section" aria-labelledby="threshold-title" data-nav-section="diagnose">
         <div class="page-shell">
           <div class="section-heading section-heading-dark reveal">
             <div class="heading-labels">
@@ -484,7 +484,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         </div>
       </section>
 
-      <section class="section-pad section-light" id="decide" aria-labelledby="decision-title" data-section="decide">
+      <section class="section-pad section-light" id="decide" aria-labelledby="decision-title" data-nav-section="decide">
         <div class="page-shell">
           <div class="section-heading reveal">
             <p class="section-index">07 · Make the decision</p>
@@ -563,7 +563,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         </div>
       </section>
 
-      <section class="section-pad" aria-labelledby="hitl-title">
+      <section class="section-pad" aria-labelledby="hitl-title" data-nav-section="decide">
         <div class="page-shell split-heading">
           <div class="section-heading reveal">
             <p class="section-index">08 · Human-in-the-loop</p>
@@ -591,7 +591,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         </div>
       </section>
 
-      <section class="section-pad release-section" id="measure" aria-labelledby="measure-title" data-section="measure">
+      <section class="section-pad release-section" id="measure" aria-labelledby="measure-title" data-nav-section="measure">
         <div class="page-shell">
           <div class="section-heading section-heading-dark reveal">
             <p class="section-index">09 · The release contract</p>
@@ -641,7 +641,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         </div>
       </section>
 
-      <section class="section-pad" aria-labelledby="customer-title">
+      <section class="section-pad" aria-labelledby="customer-title" data-nav-section="measure">
         <div class="page-shell">
           <div class="section-heading reveal">
             <p class="section-index">10 · Enterprise communication</p>
@@ -696,7 +696,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         </div>
       </section>
 
-      <section class="section-pad roadmap-section" aria-labelledby="roadmap-title">
+      <section class="section-pad roadmap-section" aria-labelledby="roadmap-title" data-nav-section="measure">
         <div class="page-shell">
           <div class="section-heading reveal">
             <p class="section-index">11 · Roadmap thinking</p>
@@ -740,7 +740,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         </div>
       </section>
 
-      <section class="section-pad experience-section" id="experience" aria-labelledby="experience-title" data-section="experience">
+      <section class="section-pad experience-section" id="experience" aria-labelledby="experience-title" data-nav-section="experience">
         <div class="page-shell">
           <div class="experience-intro reveal">
             <div>
@@ -785,7 +785,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         </div>
       </section>
 
-      <section class="section-pad contact-section" id="contact" aria-labelledby="contact-title">
+      <section class="section-pad contact-section" id="contact" aria-labelledby="contact-title" data-nav-section="experience">
         <div class="page-shell contact-shell reveal">
           <div>
             <p class="eyebrow">Vilol Joshi</p>
