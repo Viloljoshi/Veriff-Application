@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f5ef"/>
+  <rect x="52" y="52" width="1096" height="526" rx="28" fill="#0c3035"/>
+  <circle cx="1014" cy="315" r="174" fill="none" stroke="#42656a" stroke-width="2"/>
+  <circle cx="1014" cy="315" r="95" fill="none" stroke="#42656a" stroke-width="2"/>
+  <circle cx="1014" cy="315" r="18" fill="#14e5c5"/>
+  <circle cx="885" cy="198" r="7" fill="#dffbf5"/>
+  <circle cx="1125" cy="383" r="7" fill="#b44432"/>
+  <g fill="#14e5c5" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">
+    <text x="108" y="132">IDV RELIABILITY LAB</text>
+  </g>
+  <g fill="#ffffff" font-family="Inter, Arial, sans-serif" font-weight="700">
+    <text x="108" y="252" font-size="68">When global health</text>
+    <text x="108" y="330" font-size="68">hides a broken</text>
+    <text x="108" y="408" font-size="68">customer cohort.</text>
+  </g>
+  <g fill="#b8c8c9" font-family="Inter, Arial, sans-serif" font-size="23">
+    <text x="108" y="512">A product case for Veriff · Vilol Joshi</text>
+  </g>
+</svg>

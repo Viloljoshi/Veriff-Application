@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://viloljoshi.github.io/Veriff-Application/sitemap.xml
