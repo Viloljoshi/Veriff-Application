@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0c3035" />
     <meta
       name="description"
@@ -82,13 +82,14 @@
       </div>
 
       <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden data-mobile-menu>
-        <a href="#problem">Problem</a>
-        <a href="#diagnose">Diagnose</a>
-        <a href="#decide">Decide</a>
-        <a href="#measure">Measure</a>
-        <a href="#experience">Experience</a>
+        <a href="#problem" data-nav-link>Problem</a>
+        <a href="#diagnose" data-nav-link>Diagnose</a>
+        <a href="#decide" data-nav-link>Decide</a>
+        <a href="#measure" data-nav-link>Measure</a>
+        <a href="#experience" data-nav-link>Experience</a>
         <a href="#contact">Let’s talk</a>
       </nav>
+      <div class="case-progress" aria-hidden="true"><span data-scroll-progress></span></div>
     </header>
 
     <main id="main">
@@ -106,13 +107,12 @@
             <p class="eyebrow">A product case for Veriff · Physical Document Verification</p>
             <h1 id="hero-title">A healthy global model can still be failing your biggest customer.</h1>
             <p class="hero-lede">
-              Physical document IDV operates across a long tail of customers, countries,
-              document types, variants, capture conditions and fraud patterns.
+              Physical document IDV spans customers, countries, document variants,
+              capture conditions and fraud patterns.
             </p>
             <p class="hero-support">
-              Aggregate performance can look healthy while a commercially important cohort
-              deteriorates underneath it. This is how I’d find the gap, understand it, contain
-              it and decide what to improve next.
+              Aggregate health can hide a critical cohort failure. This case shows how I’d
+              isolate it, contain the risk and decide what to improve.
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#incident">Investigate the case <span aria-hidden="true">↓</span></a>
@@ -198,35 +198,41 @@
             <p>Start with the level where the failure is felt, not the level where the dashboard is green.</p>
           </div>
 
-          <div class="health-map reveal" role="img" aria-label="Global model is healthy while Customer C contains one warning cohort">
-            <div class="global-node">
-              <span>Global model</span>
-              <strong>Healthy</strong>
-            </div>
-            <div class="map-connector" aria-hidden="true"></div>
-            <div class="customer-row">
-              <div class="customer-node"><span>Customer A</span><strong class="ok">Stable</strong></div>
-              <div class="customer-node"><span>Customer B</span><strong class="ok">Stable</strong></div>
-              <div class="customer-node customer-warning">
-                <span>Customer C</span><strong class="warning">Regression</strong>
-                <div class="cohort-pulse">One bad cohort</div>
+          <p class="scroll-hint reveal">Swipe to compare customer cohorts <span aria-hidden="true">→</span></p>
+          <div class="health-map reveal" role="group" tabindex="0" aria-label="Customer health comparison. Scroll horizontally on small screens. Global model is healthy while Customer C contains one warning cohort." data-health-map>
+            <div class="map-stage">
+              <div class="global-node">
+                <span>Global model</span>
+                <strong>Healthy</strong>
               </div>
-              <div class="customer-node"><span>Customer D</span><strong class="ok">Stable</strong></div>
+              <div class="map-connector" aria-hidden="true"></div>
+              <div class="customer-row">
+                <div class="customer-node"><span>Customer A</span><strong class="ok">Stable</strong></div>
+                <div class="customer-node"><span>Customer B</span><strong class="ok">Stable</strong></div>
+                <div class="customer-node customer-warning">
+                  <span>Customer C</span><strong class="warning">Regression</strong>
+                  <div class="cohort-pulse">
+                    <span>Affected cohort</span>
+                    <strong>Brazil · Driver Licence · Variant X · Android Web</strong>
+                  </div>
+                </div>
+                <div class="customer-node"><span>Customer D</span><strong class="ok">Stable</strong></div>
+              </div>
             </div>
           </div>
 
           <div class="reframe reveal">
             <div>
-              <span class="reframe-label">Initial question</span>
-              <p>“Is the model broken?”</p>
+              <span class="reframe-label">Reported concern</span>
+              <p>“Did the release break the model?”</p>
             </div>
             <span class="reframe-arrow" aria-hidden="true">→</span>
             <div>
-              <span class="reframe-label">Better question</span>
-              <p>“Which part of this customer’s traffic behaves differently, and why?”</p>
+              <span class="reframe-label">First PM question</span>
+              <p>“Which cohort changed after the release, and where in its path did it change?”</p>
             </div>
           </div>
-          <p class="pull-line reveal">Segment before reacting.</p>
+          <p class="pull-line reveal">I would isolate the failure before changing global policy.</p>
         </div>
       </section>
 
@@ -327,7 +333,7 @@
               <span class="label label-synthetic">Synthetic result</span>
             </div>
             <h2 id="diagnose-title">Segment until the failure reveals itself.</h2>
-            <p>Use the interaction below to follow the concentration path. The aim is diagnosis, not dashboard theatre.</p>
+            <p>Follow the path until the regression is concentrated enough to investigate.</p>
           </div>
 
           <div class="drilldown-shell reveal" data-drilldown>
@@ -385,7 +391,8 @@ ORDER BY first_pass_rate ASC;</code></pre>
             <p>Keep the domain-gap explanation as a hypothesis until simpler causes have been ruled out.</p>
           </div>
 
-          <div class="diagnostic-chain reveal" role="list" aria-label="Diagnostic chain from traffic to human review">
+          <p class="scroll-hint reveal">Swipe through the diagnostic pipeline <span aria-hidden="true">→</span></p>
+          <div class="diagnostic-chain reveal" role="list" tabindex="0" aria-label="Diagnostic chain from traffic to human review. Scroll horizontally on small screens.">
             <article role="listitem"><span>01</span><h3>Traffic mix</h3><p>New variant?<br />Geographic shift?</p></article>
             <article role="listitem"><span>02</span><h3>Capture</h3><p>Image quality?<br />SDK or device change?</p></article>
             <article role="listitem"><span>03</span><h3>Classification</h3><p>Confidence shift?<br />Specimen mismatch?</p></article>
@@ -422,11 +429,11 @@ ORDER BY first_pass_rate ASC;</code></pre>
         <div class="page-shell">
           <div class="section-heading section-heading-dark reveal">
             <div class="heading-labels">
-              <p class="section-index">06 · ML fluency without ML theatre</p>
-              <span class="label label-synthetic-dark">Illustrative relationship</span>
+              <p class="section-index">06 · Translate model trade-offs</p>
+              <span class="label label-synthetic-dark">Interactive synthetic example</span>
             </div>
-            <h2 id="threshold-title">Model metric ≠ product decision</h2>
-            <p>Training may optimize a statistical loss. Production still needs an operating point because the two mistakes do not cost the same.</p>
+            <h2 id="threshold-title">A model metric is not a product decision.</h2>
+            <p>The operating point matters because false accepts and false rejects do not carry the same cost.</p>
           </div>
 
           <div class="threshold-lab reveal" data-threshold-lab>
@@ -447,17 +454,18 @@ ORDER BY first_pass_rate ASC;</code></pre>
               />
               <div class="threshold-range"><span>More permissive</span><span>More restrictive</span></div>
               <p id="threshold-description">
-                Move the slider to explore a conceptual trade-off. Values are synthetic and do not represent Veriff.
+                Explore the trade-off. Values are synthetic and do not represent Veriff.
               </p>
             </div>
 
-            <div class="threshold-metrics" aria-live="polite">
+            <div class="threshold-metrics">
               <div><span>Fraud recall</span><strong data-metric="recall">89.8%</strong><small>bad actors caught</small></div>
               <div><span>Fraud precision</span><strong data-metric="precision">91.2%</strong><small>flags that are fraud</small></div>
               <div><span>False acceptance</span><strong data-metric="far">1.1%</strong><small>fraud exposure</small></div>
               <div><span>False rejection</span><strong data-metric="frr">3.8%</strong><small>honest-user harm</small></div>
               <div><span>Genuine conversion</span><strong data-metric="conversion">95.2%</strong><small>first-pass outcome</small></div>
             </div>
+            <p class="sr-only" aria-live="polite" aria-atomic="true" data-threshold-announcement></p>
           </div>
 
           <div class="threshold-explainer reveal">
@@ -466,11 +474,11 @@ ORDER BY first_pass_rate ASC;</code></pre>
           </div>
 
           <blockquote class="pm-responsibility reveal">
-            <span>My PM responsibility</span>
+            <span>How I use this</span>
             <p>
-              I would not tell the ML team which loss function to use. I would make the business
-              cost asymmetry explicit, define the target outcome and guardrails, and make sure
-              we’re optimizing the right problem.
+              From document workflows, I learned that a threshold only matters when its costs are
+              explicit. I’d define the target cohort, risk tolerance and product guardrails, then
+              choose the operating point with ML, Risk and Operations.
             </p>
           </blockquote>
         </div>
@@ -480,7 +488,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         <div class="page-shell">
           <div class="section-heading reveal">
             <p class="section-index">07 · Make the decision</p>
-            <h2 id="decision-title">What would I actually do?</h2>
+            <h2 id="decision-title">Contain first. Close the gap next.</h2>
             <p>Choose the narrowest intervention that protects the customer while the evidence becomes stronger.</p>
           </div>
 
@@ -536,8 +544,8 @@ ORDER BY first_pass_rate ASC;</code></pre>
           </div>
 
           <div class="decision-principle reveal">
-            <p>The goal isn’t “retrain the model.”</p>
-            <strong>It is to fix the customer outcome without creating unacceptable risk elsewhere.</strong>
+            <p>Durable outcome</p>
+            <strong>Recover the affected cohort without weakening fraud protection elsewhere.</strong>
           </div>
 
           <div class="public-case reveal">
@@ -559,7 +567,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         <div class="page-shell split-heading">
           <div class="section-heading reveal">
             <p class="section-index">08 · Human-in-the-loop</p>
-            <h2 id="hitl-title">Human review is more than a fallback.</h2>
+            <h2 id="hitl-title">Human review is containment and evidence.</h2>
             <p>It protects quality under uncertainty and exposes where automation does not understand reality well enough.</p>
           </div>
 
@@ -587,7 +595,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
         <div class="page-shell">
           <div class="section-heading section-heading-dark reveal">
             <p class="section-index">09 · The release contract</p>
-            <h2 id="measure-title">How I’d know the change is actually better.</h2>
+            <h2 id="measure-title">The change ships only if the cohort recovers safely.</h2>
             <p>Do not celebrate an offline metric until the target cohort improves without exporting harm elsewhere.</p>
           </div>
 
@@ -624,7 +632,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
           </div>
 
           <blockquote class="release-quote reveal">
-            <p>A better offline model is not automatically a better product.</p>
+            <p>Offline improvement is only the first release gate.</p>
             <footer>
               I would ship only when the target cohort improves without moving unacceptable fraud,
               conversion, latency or operational risk somewhere else.
@@ -705,7 +713,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
               <article><span>E</span><p>Custom strategic-customer requirement</p><strong>Narrow reach</strong></article>
             </div>
             <div class="priority-model">
-              <span class="card-number">A thinking aid, not a universal formula</span>
+              <span class="card-number">Prioritization inputs</span>
               <div class="formula">
                 <span>Impact × Risk × Reach × Reusability</span>
                 <i aria-hidden="true"></i>
@@ -717,7 +725,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
           </div>
 
           <div class="delivery-strip reveal">
-            <div class="delivery-intro"><span>Cross-functional delivery</span><p>One decision, translated eight ways.</p></div>
+            <div class="delivery-intro"><span>Cross-functional delivery</span><p>Each team needs a clear delivery contract.</p></div>
             <ul>
               <li><strong>ML / Data</strong><span>Change + evaluation</span></li>
               <li><strong>Engineering</strong><span>Behaviour + rollout</span></li>
@@ -741,11 +749,11 @@ ORDER BY first_pass_rate ASC;</code></pre>
             </div>
             <div>
               <p>
-                I’ve worked on document and KYC systems where product quality depended on the interaction between capture,
-                OCR, extraction confidence, automated decisions and human review.
+                I’ve owned document and KYC workflows where capture quality, OCR, extraction confidence,
+                automated decisions and human review determined the customer outcome.
               </p>
               <p>
-                That made this Veriff role feel unusually close to problems I have already spent time solving.
+                That experience shaped the questions, containment path and release gates in this case.
               </p>
             </div>
           </div>
@@ -757,8 +765,8 @@ ORDER BY first_pass_rate ASC;</code></pre>
           <div class="capability-grid">
             <article class="reveal"><span>Document intelligence</span><h3>OCR → extraction → validation → HITL</h3><p>Product ownership across document and KYC decision pipelines.</p></article>
             <article class="reveal"><span>ML product judgment</span><h3>Thresholds · evaluation · confidence</h3><p>Golden-set thinking, precision/recall trade-offs and failure analysis.</p></article>
-            <article class="reveal"><span>Technically independent</span><h3>SQL · pipeline debugging · RCA</h3><p>Comfortable interrogating product and model behaviour directly.</p></article>
-            <article class="reveal"><span>Enterprise + regulated</span><h3>B2B · financial services · governance</h3><p>Experience translating technical constraints into customer outcomes.</p></article>
+            <article class="reveal"><span>Hands-on diagnosis</span><h3>SQL · pipeline debugging · RCA</h3><p>Comfortable interrogating product and model behaviour directly.</p></article>
+            <article class="reveal"><span>Enterprise delivery</span><h3>B2B · financial services · governance</h3><p>Experience translating technical constraints into customer outcomes.</p></article>
           </div>
 
           <div class="proof-grid reveal" aria-label="Candidate-reported prior project metrics">
@@ -780,15 +788,15 @@ ORDER BY first_pass_rate ASC;</code></pre>
       <section class="section-pad contact-section" id="contact" aria-labelledby="contact-title">
         <div class="page-shell contact-shell reveal">
           <div>
-            <p class="eyebrow">Vilol Joshi · Senior Product Manager</p>
+            <p class="eyebrow">Vilol Joshi</p>
             <h2 id="contact-title">That’s how I’d approach the problem.</h2>
           </div>
           <div>
             <p>
-              I applied because document intelligence, ML decision quality, enterprise customers and operational systems
-              are unusually close to work I have already enjoyed doing.
+              I applied because this role sits at the intersection of work I know well: document intelligence,
+              ML decision quality, enterprise customers and operational systems.
             </p>
-            <p>The interesting conversation now is where Veriff’s real constraints differ from the assumptions I’ve made here.</p>
+            <p>I’d welcome a conversation about where Veriff’s real constraints differ from the assumptions in this case.</p>
             <div class="contact-actions">
               <a class="button button-mint" href="mailto:joshivilol1011@gmail.com?subject=Veriff%20Senior%20Product%20Manager%20role">Let’s talk about the role <span aria-hidden="true">↗</span></a>
               <a href="https://www.linkedin.com/in/viloljoshi" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
@@ -801,7 +809,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
 
     <footer class="site-footer">
       <div class="page-shell footer-grid">
-        <div><strong>Vilol Joshi</strong><span>Senior Product Manager</span></div>
+        <div><strong>Vilol Joshi</strong></div>
         <div class="footer-links">
           <a href="mailto:joshivilol1011@gmail.com">Email</a>
           <a href="https://www.linkedin.com/in/viloljoshi" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -816,7 +824,7 @@ ORDER BY first_pass_rate ASC;</code></pre>
 
     <dialog class="role-dialog" data-role-dialog aria-labelledby="role-dialog-title">
       <div class="dialog-head">
-        <div><span class="eyebrow">Relevant value</span><h2 id="role-dialog-title">What I’d bring to Veriff</h2></div>
+        <div><span class="eyebrow">Experience I can apply</span><h2 id="role-dialog-title">What I’d bring to Veriff</h2></div>
         <button type="button" aria-label="Close value summary" data-close-role-dialog>×</button>
       </div>
       <div class="role-map">

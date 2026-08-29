@@ -18,6 +18,11 @@ menuButton?.addEventListener("click", () => {
 
 mobileMenuLinks.forEach((link) => link.addEventListener("click", () => setMenu(false)));
 
+document.addEventListener("pointerdown", (event) => {
+  if (menuButton?.getAttribute("aria-expanded") !== "true") return;
+  if (header && !header.contains(event.target)) setMenu(false);
+});
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && menuButton?.getAttribute("aria-expanded") === "true") {
     setMenu(false);
@@ -25,12 +30,44 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-function updateHeader() {
+const scrollProgress = document.querySelector("[data-scroll-progress]");
+let pageChromeFrame = null;
+
+function updatePageChrome() {
   header?.classList.toggle("is-scrolled", window.scrollY > 8);
+  if (scrollProgress) {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+    scrollProgress.style.transform = `scaleX(${progress})`;
+  }
+  pageChromeFrame = null;
 }
 
-updateHeader();
-window.addEventListener("scroll", updateHeader, { passive: true });
+function requestPageChromeUpdate() {
+  if (pageChromeFrame !== null) return;
+  pageChromeFrame = window.requestAnimationFrame(updatePageChrome);
+}
+
+updatePageChrome();
+window.addEventListener("scroll", requestPageChromeUpdate, { passive: true });
+
+const healthMap = document.querySelector("[data-health-map]");
+let healthMapWasCompact = false;
+
+function updateHealthMapViewport() {
+  if (!healthMap) return;
+  const isCompact = window.innerWidth <= 850;
+  if (isCompact && !healthMapWasCompact) {
+    window.requestAnimationFrame(() => {
+      healthMap.scrollLeft = (healthMap.scrollWidth - healthMap.clientWidth) / 2;
+    });
+  } else if (!isCompact && healthMapWasCompact) {
+    healthMap.scrollLeft = 0;
+  }
+  healthMapWasCompact = isCompact;
+}
+
+updateHealthMapViewport();
 
 const revealItems = [...document.querySelectorAll(".reveal")];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -128,6 +165,14 @@ if (drilldown && window.IDV_CASE?.cohortPath) {
     } else {
       nextButton.innerHTML = `Narrow to ${path[activeIndex + 1].label.toLowerCase()} <span aria-hidden="true">→</span>`;
     }
+
+    const activeButton = buttons[activeIndex];
+    if (pathContainer.scrollWidth > pathContainer.clientWidth && activeButton) {
+      pathContainer.scrollTo({
+        left: activeButton.offsetLeft - (pathContainer.clientWidth - activeButton.clientWidth) / 2,
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    }
   }
 
   nextButton.addEventListener("click", () => {
@@ -147,6 +192,7 @@ if (drilldown && window.IDV_CASE?.cohortPath) {
 
 const thresholdSlider = document.querySelector("[data-threshold-slider]");
 const thresholdOutput = document.querySelector("[data-threshold-output]");
+const thresholdAnnouncement = document.querySelector("[data-threshold-announcement]");
 const thresholdMetrics = {
   recall: document.querySelector('[data-metric="recall"]'),
   precision: document.querySelector('[data-metric="precision"]'),
@@ -176,6 +222,9 @@ function updateThreshold() {
   Object.entries(conceptual).forEach(([key, metricValue]) => {
     if (thresholdMetrics[key]) thresholdMetrics[key].textContent = percentage(metricValue);
   });
+  if (thresholdAnnouncement) {
+    thresholdAnnouncement.textContent = `Threshold ${value}. Fraud recall ${percentage(conceptual.recall)}. Fraud precision ${percentage(conceptual.precision)}. False acceptance ${percentage(conceptual.far)}. False rejection ${percentage(conceptual.frr)}. Genuine conversion ${percentage(conceptual.conversion)}.`;
+  }
 }
 
 thresholdSlider?.addEventListener("input", updateThreshold);
@@ -196,6 +245,12 @@ openRoleDialogButton?.addEventListener("click", () => {
 
 closeRoleDialogButton?.addEventListener("click", () => roleDialog?.close());
 
+roleDialog?.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  event.preventDefault();
+  roleDialog.close();
+});
+
 roleDialog?.addEventListener("click", (event) => {
   if (event.target === roleDialog) roleDialog.close();
 });
@@ -207,4 +262,6 @@ roleDialog?.addEventListener("close", () => {
 
 window.addEventListener("resize", () => {
   if (window.innerWidth > 1100) setMenu(false);
+  requestPageChromeUpdate();
+  updateHealthMapViewport();
 });
