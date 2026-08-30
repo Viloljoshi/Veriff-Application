@@ -6,7 +6,7 @@ window.IDV_SOURCES = [
     sourceTitle: "Comprehensive Document & Identity Verification",
     sourceUrl: "https://www.veriff.com/product/identity-verification",
     sourceType: "Official Veriff source",
-    checkedDate: "2026-08-29",
+    checkedDate: "2026-08-30",
   },
   {
     id: "veriff-domain-gap",
@@ -15,6 +15,6 @@ window.IDV_SOURCES = [
     sourceTitle: "Data controllership for fraud prevention",
     sourceUrl: "https://www.veriff.com/identity-verification/fraud-prevention",
     sourceType: "Official Veriff source",
-    checkedDate: "2026-08-29",
+    checkedDate: "2026-08-30",
   },
 ];

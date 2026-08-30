@@ -95,32 +95,32 @@ if (reducedMotion || !("IntersectionObserver" in window)) {
 
 const navLinks = [...document.querySelectorAll("[data-nav-link]")];
 const trackedSections = [...document.querySelectorAll("[data-nav-section]")];
+let navFrame = null;
 
-if ("IntersectionObserver" in window && trackedSections.length) {
-  const visibleSections = new Map();
-  const navObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          visibleSections.set(entry.target, {
-            section: entry.target.dataset.navSection,
-            ratio: entry.intersectionRatio,
-          });
-        } else visibleSections.delete(entry.target);
-      });
+function updateActiveNav() {
+  if (!trackedSections.length) return;
+  const marker = window.innerHeight * 0.35;
+  let current = trackedSections[0].dataset.navSection;
 
-      const current = [...visibleSections.values()].sort((a, b) => b.ratio - a.ratio)[0]?.section;
-      navLinks.forEach((link) => {
-        const isCurrent = link.getAttribute("href") === `#${current}`;
-        if (isCurrent) link.setAttribute("aria-current", "location");
-        else link.removeAttribute("aria-current");
-      });
-    },
-    { threshold: 0, rootMargin: "-20% 0px -70%" },
-  );
+  trackedSections.forEach((section) => {
+    if (section.getBoundingClientRect().top <= marker) current = section.dataset.navSection;
+  });
 
-  trackedSections.forEach((section) => navObserver.observe(section));
+  navLinks.forEach((link) => {
+    const isCurrent = link.getAttribute("href") === `#${current}`;
+    if (isCurrent) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+  navFrame = null;
 }
+
+function requestActiveNavUpdate() {
+  if (navFrame !== null) return;
+  navFrame = window.requestAnimationFrame(updateActiveNav);
+}
+
+updateActiveNav();
+window.addEventListener("scroll", requestActiveNavUpdate, { passive: true });
 
 const drilldown = document.querySelector("[data-drilldown]");
 
@@ -271,5 +271,6 @@ roleDialog?.addEventListener("close", () => {
 window.addEventListener("resize", () => {
   if (window.innerWidth > 1100) setMenu(false);
   requestPageChromeUpdate();
+  requestActiveNavUpdate();
   updateHealthMapViewport();
 });
