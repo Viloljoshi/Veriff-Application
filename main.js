@@ -100,7 +100,7 @@ let navFrame = null;
 function updateActiveNav() {
   if (!trackedSections.length) return;
   const marker = window.innerHeight * 0.35;
-  let current = trackedSections[0].dataset.navSection;
+  let current = null;
 
   trackedSections.forEach((section) => {
     if (section.getBoundingClientRect().top <= marker) current = section.dataset.navSection;
